@@ -42,6 +42,65 @@
 		}
 	}
 
+	function fixAdminVocabulary() {
+		var path = window.location.pathname || '';
+		var isUserEdit = path.indexOf('manage_user_edit_page.php') !== -1;
+		var isProjEdit = path.indexOf('manage_proj_edit_page.php') !== -1;
+
+		if (isUserEdit) {
+			var projectSelect = document.getElementById('add-user-project-id');
+			if (projectSelect) {
+				var widget = projectSelect.closest('.widget-box');
+				if (widget) {
+					var title = widget.querySelector('.widget-title');
+					if (title) {
+						title.textContent = 'Assigner un client à l\'utilisateur';
+					}
+					var btn = widget.querySelector('.widget-toolbox button');
+					if (btn) {
+						btn.textContent = 'Assigner le(s) client(s)';
+					}
+				}
+				appendEmptySelectHint(
+					projectSelect,
+					'Tous les clients existants sont déjà assignés à cet utilisateur, ou aucun client n\'a été créé.'
+				);
+			}
+		}
+
+		if (isProjEdit) {
+			var userSelect = document.getElementById('project-add-users-username');
+			if (userSelect) {
+				var projWidget = userSelect.closest('.widget-box');
+				if (projWidget) {
+					var label = projWidget.querySelector('label[for="project-add-users-username"]');
+					if (label) {
+						label.innerHTML = '<span class="required">*</span> Utilisateurs non assignés à ce client';
+					}
+				}
+				appendEmptySelectHint(
+					userSelect,
+					'Tous les utilisateurs sont déjà assignés à ce client, ou aucun compte disponible.'
+				);
+			}
+		}
+	}
+
+	function appendEmptySelectHint(selectEl, message) {
+		if (selectEl.options.length > 0) {
+			return;
+		}
+		var td = selectEl.closest('td');
+		if (!td || td.querySelector('.bfs-admin-hint')) {
+			return;
+		}
+		var hint = document.createElement('p');
+		hint.className = 'bfs-admin-hint text-muted';
+		hint.style.marginTop = '0.5rem';
+		hint.textContent = message;
+		td.appendChild(hint);
+	}
+
 	function hideClientAdminControls() {
 		if (!document.body.classList.contains('bfs-client-user')) {
 			return;
@@ -65,6 +124,7 @@
 		document.body.classList.add('bfs-portal');
 		hideMantisFooter();
 		hideClientAdminControls();
+		fixAdminVocabulary();
 
 		if (document.body.classList.contains('login-layout')) {
 			var container = document.querySelector('.login-container');

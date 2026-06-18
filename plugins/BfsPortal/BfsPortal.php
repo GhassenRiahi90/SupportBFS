@@ -17,7 +17,7 @@ class BfsPortalPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'BFS Support Portal';
 		$this->description = 'Personnalisation graphique et fonctionnelle du portail support BFS.';
-		$this->version     = '0.7.0';
+		$this->version     = '0.7.1';
 		$this->author      = 'Business Financial Solutions';
 		$this->url         = 'https://www.bfs.tn';
 		$this->page        = 'isolation_audit';
@@ -111,6 +111,7 @@ class BfsPortalPlugin extends MantisPlugin {
 	 */
 	function schema() {
 		return array(
+			array( null ),
 			array( null ),
 			array( null ),
 			array( null ),
