@@ -1,13 +1,9 @@
-# Déploiement FTP vers support.bfs.tn (public_html/support)
-#
-# IMPORTANT — Phase 1 : déclenchement MANUEL uniquement.
-# Après validation, décommenter le bloc "push" ci-dessous pour activer
-# le déploiement automatique à chaque push sur main.
-#
-# Secrets requis (déjà configurés dans GitHub) :
-#   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
-
 name: Deploy to cPanel (FTP)
+
+# Deploiement FTP vers support.bfs.tn (public_html/support)
+# Phase 1 : declenchement MANUEL uniquement (workflow_dispatch).
+# Pour activer le deploiement auto sur push main, decommenter le bloc push ci-dessous.
+# Secrets requis : FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
 
 on:
   workflow_dispatch:
@@ -17,7 +13,7 @@ on:
 
 jobs:
   deploy:
-    name: Sync MantisBT → public_html/support
+    name: Sync MantisBT to public_html/support
     runs-on: ubuntu-latest
     concurrency:
       group: ftp-deploy-support-bfs
