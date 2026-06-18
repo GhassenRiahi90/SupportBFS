@@ -9,7 +9,7 @@ class BfsPortalPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'BFS Support Portal';
 		$this->description = 'Personnalisation graphique et fonctionnelle du portail support BFS.';
-		$this->version     = '0.3.2';
+		$this->version     = '0.3.3';
 		$this->author      = 'Business Financial Solutions';
 		$this->url         = 'https://www.bfs.tn';
 	}
@@ -36,7 +36,19 @@ class BfsPortalPlugin extends MantisPlugin {
 		return true;
 	}
 
-	function upgrade( $p_old_version ) {
+	/**
+	 * Schéma plugin : déclenche le bouton « Mettre à jour » dans MantisBT.
+	 */
+	function schema() {
+		return array(
+			array( null ),
+		);
+	}
+
+	/**
+	 * @param int $p_schema Index d'étape de schéma (pas l'ancienne version).
+	 */
+	function upgrade( $p_schema ) {
 		BfsSeed::run();
 		return true;
 	}
