@@ -1,0 +1,54 @@
+# Déploiement FTP vers support.bfs.tn (public_html/support)
+#
+# IMPORTANT — Phase 1 : déclenchement MANUEL uniquement.
+# Après validation, décommenter le bloc "push" ci-dessous pour activer
+# le déploiement automatique à chaque push sur main.
+#
+# Secrets requis (déjà configurés dans GitHub) :
+#   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
+
+name: Deploy to cPanel (FTP)
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  deploy:
+    name: Sync MantisBT → public_html/support
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ftp-deploy-support-bfs
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./
+          server-dir: public_html/support/
+          dangerous-clean-slate: false
+          log-level: standard
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
+            **/*.md
+            **/tests/**
+            **/docbook/**
+            **/build/**
+            config/config_inc.php
+            config/config_inc.php.bak
+            config/mantis_offline.php
+            **/attachments/**
+            **/project/**

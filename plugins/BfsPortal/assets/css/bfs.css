@@ -1,0 +1,15 @@
+/**
+ * Support BFS — Charte graphique (Phase 2 : styles complets)
+ * Palette calibrée depuis le logo BFS officiel.
+ */
+:root {
+	--bfs-blue-dark: #0073B1;
+	--bfs-blue-light: #54B9E9;
+	--bfs-grey-body: #5B6770;
+	--bfs-grey-muted: #A6A9AA;
+	--bfs-black: #111111;
+	--bfs-white: #FFFFFF;
+	--bfs-success: #2E7D32;
+	--bfs-warning: #E65100;
+	--bfs-error: #B71C1C;
+}

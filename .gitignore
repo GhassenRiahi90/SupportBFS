@@ -1,0 +1,69 @@
+# --- BFS Support Portal overrides ---
+
+# Production secrets (never commit or deploy)
+config/config_inc.php
+config/config_inc.php.bak
+config/mantis_offline.php
+
+# Local / IDE
+*~
+*.swp
+*.bak
+.DS_Store
+.idea/
+.vscode/
+*.kdev4
+nbproject/
+.buildpath
+.cache
+.project
+.settings
+
+# --- MantisBT upstream defaults (kept for upgrades) ---
+
+# Docbook builds
+docbook/*/*/builddate
+docbook/*/*/build
+docbook/*/*/install
+docbook/*/tmp
+!docbook/Admin_Guide/*/config
+
+# Local docbook from release tarballs
+doc/en-US
+
+# Untracked plugins (allow BFS custom plugin)
+plugins/*
+!plugins/MantisCoreFormatting
+!plugins/MantisGraph
+!plugins/XmlImportExport
+!plugins/Gravatar
+!plugins/BfsPortal
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Libraries (installed via Composer)
+library/FirePHPCore
+library/ezc
+library/adodb
+library/disposable
+library/parsedown
+library/phpmailer
+library/securimage
+api/rest/swagger
+
+# Composer
+/vendor/
+composer.phar
+
+# PHPUnit
+.phpunit.result.cache
+
+# Legacy v1.2.x config paths (if present at repo root)
+/config_inc.php
+/custom_constants_inc.php
+/custom_functions_inc.php
+/custom_relationships_inc.php
+/custom_strings_inc.php
+/api/soap/mc_config_inc.php

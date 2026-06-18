@@ -1,0 +1,56 @@
+<?php
+/**
+ * Support BFS — Modèle de configuration MantisBT
+ *
+ * Copier ce fichier vers config_inc.php sur le serveur de production
+ * (via cPanel File Manager ou FTP) et renseigner les valeurs sensibles.
+ *
+ * NE JAMAIS versionner config_inc.php (contient identifiants DB et SMTP).
+ */
+
+# --- Base de données (cPanel → MySQL Databases) ---
+$g_hostname      = 'localhost';
+$g_db_username   = 'VOTRE_UTILISATEUR_MYSQL';
+$g_db_password   = 'VOTRE_MOT_DE_PASSE_MYSQL';
+$g_database_name = 'VOTRE_BASE_MYSQL';
+$g_db_type       = 'mysqli';
+
+# --- Sécurité ---
+# Générer une chaîne aléatoire d'au moins 16 caractères, unique à cette installation
+$g_crypto_master_salt = 'CHANGER_CETTE_VALEUR_ALEATOIRE';
+
+# --- URL et identité BFS ---
+$g_path           = 'https://support.bfs.tn/';
+$g_window_title   = 'Support BFS';
+$g_logo_image     = 'plugins/BfsPortal/assets/img/bfs-logo.png';
+$g_favicon_image  = 'plugins/BfsPortal/assets/img/favicon.ico';
+
+# --- Langue ---
+$g_default_language = 'french';
+
+# --- Accès anonyme / inscription ---
+$g_allow_signup             = OFF;
+$g_allow_anonymous_login    = OFF;
+$g_anonymous_account        = '';
+
+# --- Emails (boîte support@bfs.tn créée dans cPanel → Email Accounts) ---
+$g_phpMailer_method     = PHPMAILER_METHOD_SMTP;
+$g_smtp_host            = 'mail.bfs.tn';
+$g_smtp_port            = 465;
+$g_smtp_connection_mode = 'ssl';
+$g_smtp_username        = 'support@bfs.tn';
+$g_smtp_password        = 'MOT_DE_PASSE_BOITE_EMAIL';
+
+$g_webmaster_email      = 'support@bfs.tn';
+$g_from_email           = 'support@bfs.tn';
+$g_return_path_email    = 'support@bfs.tn';
+$g_administrator_email  = 'support@bfs.tn';
+$g_from_name            = 'Support BFS';
+
+# --- Pièces jointes (stockage disque recommandé en production) ---
+$g_allow_file_upload    = ON;
+$g_file_upload_method   = DISK;
+$g_absolute_path_default_upload_folder = 'attachments/';
+
+# --- Plugin BFS (thème, dashboard, emails) ---
+$g_plugins_enabled = ON;
