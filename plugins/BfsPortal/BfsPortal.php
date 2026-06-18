@@ -9,7 +9,7 @@ class BfsPortalPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'BFS Support Portal';
 		$this->description = 'Personnalisation graphique et fonctionnelle du portail support BFS.';
-		$this->version     = '0.3.5';
+		$this->version     = '0.3.6';
 		$this->author      = 'Business Financial Solutions';
 		$this->url         = 'https://www.bfs.tn';
 	}
@@ -53,6 +53,7 @@ class BfsPortalPlugin extends MantisPlugin {
 		return array(
 			array( null ),
 			array( null ),
+			array( null ),
 		);
 	}
 
@@ -87,18 +88,20 @@ class BfsPortalPlugin extends MantisPlugin {
 		echo '<style id="bfs-hide-mantis-footer">'
 			. '.footer .footer-content > .col-md-6{display:none!important}'
 			. '.footer .footer-content > .bfs-portal-footer{display:block!important;width:100%}'
+			. '.footer .bfs-portal-footer__row{display:flex!important;flex-wrap:wrap;align-items:center;justify-content:space-between;width:100%;gap:.5rem 1rem}'
+			. '.footer .bfs-portal-footer__meta{margin-left:auto!important;text-align:right!important}'
 			. '</style>' . "\n";
 
 		$t_year = date( 'Y' );
 		echo '<div class="bfs-portal-footer col-xs-12">' . "\n";
 		echo '<div class="bfs-portal-footer__row">' . "\n";
-		echo '<p class="bfs-portal-footer__copy">&copy; Copyright BFS ' . $t_year
+		echo '<div class="bfs-portal-footer__copy">&copy; Copyright BFS ' . $t_year
 			. ' | D&eacute;velopp&eacute; par '
 			. '<a class="bfs-portal-footer__gas" href="https://growthacceleratorservices.tn/" '
-			. 'target="_blank" rel="noopener noreferrer">Growth Accelerator Services (GAS)</a></p>' . "\n";
-		echo '<p class="bfs-portal-footer__meta">Portail support clients &mdash; '
+			. 'target="_blank" rel="noopener noreferrer">Growth Accelerator Services (GAS)</a></div>' . "\n";
+		echo '<div class="bfs-portal-footer__meta">Portail support clients &mdash; '
 			. '<a href="mailto:support@bfs.tn">support@bfs.tn</a>'
-			. ' &mdash; <a href="https://www.bfs.tn" target="_blank" rel="noopener">www.bfs.tn</a></p>' . "\n";
+			. ' &mdash; <a href="https://www.bfs.tn" target="_blank" rel="noopener">www.bfs.tn</a></div>' . "\n";
 		echo '</div>' . "\n";
 		echo '</div>' . "\n";
 	}

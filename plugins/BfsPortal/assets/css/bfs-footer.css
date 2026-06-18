@@ -24,6 +24,70 @@
 	height: auto !important;
 	max-height: none !important;
 	width: 100%;
+	line-height: 1.4 !important;
+}
+
+.footer .bfs-portal-footer__row {
+	display: flex !important;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	gap: 0.5rem 1rem;
+}
+
+.footer .bfs-portal-footer__copy,
+.footer .bfs-portal-footer__meta {
+	margin: 0;
+	font-size: 12px;
+	color: #5a6670;
+	line-height: 1.4;
+}
+
+.footer .bfs-portal-footer__copy {
+	flex: 1 1 auto;
+	text-align: left;
+}
+
+.footer .bfs-portal-footer__meta {
+	flex: 0 1 auto;
+	margin-left: auto !important;
+	text-align: right !important;
+	white-space: nowrap;
+}
+
+.footer .bfs-portal-footer__meta a,
+.footer .bfs-portal-footer__copy a.bfs-portal-footer__gas {
+	color: #0e5a8a;
+	text-decoration: none;
+}
+
+.footer .bfs-portal-footer__meta a:hover,
+.footer .bfs-portal-footer__copy a.bfs-portal-footer__gas:hover {
+	color: #4fa8d8;
+	text-decoration: underline;
+}
+
+.footer .bfs-portal-footer__copy a.bfs-portal-footer__gas {
+	font-weight: 600;
+}
+
+@media (max-width: 991px) {
+	.footer .bfs-portal-footer__meta {
+		white-space: normal;
+	}
+}
+
+@media (max-width: 767px) {
+	.footer .bfs-portal-footer__row {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.footer .bfs-portal-footer__meta {
+		margin-left: 0 !important;
+		text-align: left !important;
+	}
 }
 
 /* Badge solution propriétaire (Treasury Analytics) */
