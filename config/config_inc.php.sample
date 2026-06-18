@@ -9,11 +9,13 @@
  */
 
 # --- Base de données (cPanel → MySQL Databases) ---
-$g_hostname      = 'localhost';
-$g_db_username   = 'VOTRE_UTILISATEUR_MYSQL';
-$g_db_password   = 'VOTRE_MOT_DE_PASSE_MYSQL';
-$g_database_name = 'VOTRE_BASE_MYSQL';
-$g_db_type       = 'mysqli';
+# Base partagée avec WordPress (préfixe WP : DfZDxQVf_) — tables MantisBT : mantis_*_table
+$g_hostname          = 'localhost';
+$g_db_username       = 'bfstn1_mantis';   # utilisateur dédié recommandé (voir DEPLOIEMENT.md)
+$g_db_password       = 'MOT_DE_PASSE_MYSQL';
+$g_database_name     = 'bfstn1_wp_x6lov';
+$g_db_type           = 'mysqli';
+$g_db_table_prefix   = 'mantis';           # → tables mantis_bug_table, mantis_user_table, etc.
 
 # --- Sécurité ---
 # Générer une chaîne aléatoire d'au moins 16 caractères, unique à cette installation
