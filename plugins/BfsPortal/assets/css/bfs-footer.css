@@ -1,0 +1,41 @@
+/**
+ * Support BFS — masquage footer MantisBT (complément)
+ */
+.bfs-portal .footer-inner .footer-content > .col-md-6.no-padding,
+.bfs-portal .footer-inner .footer-content > .col-md-6:has(#powered-by-mantisbt-logo) {
+	display: none !important;
+}
+
+/* Fallback navigateurs sans :has() */
+.bfs-portal #powered-by-mantisbt-logo {
+	display: none !important;
+}
+
+.bfs-portal .footer-inner .footer-content > .col-md-6.no-padding {
+	display: none !important;
+}
+
+.bfs-portal .footer address {
+	display: none !important;
+}
+
+.bfs-portal .footer .bfs-portal-footer {
+	display: block !important;
+	width: 100%;
+}
+
+/* Badge solution propriétaire (Treasury Analytics) */
+.bfs-portal .bfs-proprietary-badge {
+	display: inline-block;
+	margin-left: 0.5rem;
+	padding: 0.15rem 0.5rem;
+	font-size: 10px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--bfs-blue-dark);
+	background: rgba(79, 168, 216, 0.2);
+	border: 1px solid var(--bfs-blue-light);
+	border-radius: 4px;
+	vertical-align: middle;
+}

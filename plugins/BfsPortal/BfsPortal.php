@@ -1,24 +1,35 @@
 <?php
 /**
  * Plugin BfsPortal — Portail Support BFS
- *
- * Charte graphique, login, masquage branding MantisBT (sans modification du core).
  */
+
+require_once __DIR__ . '/inc/BfsSeed.php';
 
 class BfsPortalPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'BFS Support Portal';
 		$this->description = 'Personnalisation graphique et fonctionnelle du portail support BFS.';
-		$this->version     = '0.2.0';
+		$this->version     = '0.3.0';
 		$this->author      = 'Business Financial Solutions';
 		$this->url         = 'https://www.bfs.tn';
 	}
 
 	function hooks() {
 		return array(
-			'EVENT_LAYOUT_RESOURCES'  => 'resources',
+			'EVENT_LAYOUT_RESOURCES'   => 'resources',
+			'EVENT_LAYOUT_BODY_BEGIN'  => 'body_begin',
 			'EVENT_LAYOUT_PAGE_FOOTER' => 'page_footer',
 		);
+	}
+
+	function install() {
+		BfsSeed::run();
+		return true;
+	}
+
+	function upgrade( $p_old_version ) {
+		BfsSeed::run();
+		return true;
 	}
 
 	function resources() {
@@ -28,9 +39,16 @@ class BfsPortalPlugin extends MantisPlugin {
 		echo '<link rel="stylesheet" type="text/css" href="'
 			. plugin_file( 'assets/css/bfs.css' )
 			. '" />' . "\n";
+		echo '<link rel="stylesheet" type="text/css" href="'
+			. plugin_file( 'assets/css/bfs-footer.css' )
+			. '" />' . "\n";
 		echo '<script src="'
 			. plugin_file( 'assets/js/bfs-portal.js' )
 			. '"></script>' . "\n";
+	}
+
+	function body_begin() {
+		echo '<script>document.documentElement.classList.add("bfs-portal");</script>' . "\n";
 	}
 
 	function page_footer() {
