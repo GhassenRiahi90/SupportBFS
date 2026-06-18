@@ -148,7 +148,7 @@ class BfsSeed {
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_default = (int)$t_row['default_project'];
 			if( !project_exists( $t_default ) ) {
-				user_pref_set( (int)$t_row['user_id'], 'default_project', ALL_PROJECTS );
+				user_pref_set_pref( (int)$t_row['user_id'], 'default_project', ALL_PROJECTS );
 			}
 		}
 	}
