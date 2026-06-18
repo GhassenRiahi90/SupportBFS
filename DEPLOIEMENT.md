@@ -8,6 +8,8 @@ Développement (Git)  →  GitHub SupportBFS  →  GitHub Actions (FTP)  →  pu
 
 Pas de Git natif côté serveur mutualisé : le déploiement se fait par **synchronisation FTP**.
 
+> **Architecture client (v0.4.0+)** : un projet MantisBT = un **client** (privé). Les solutions BFS sont des **catégories globales**. Voir [ONBOARDING_CLIENT.md](ONBOARDING_CLIENT.md) avant tout déploiement réel avec des clients.
+
 ---
 
 ## 1. Secrets GitHub Actions (déjà configurés)

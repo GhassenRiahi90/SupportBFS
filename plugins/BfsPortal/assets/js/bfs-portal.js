@@ -12,14 +12,17 @@
 		}
 	}
 
-	function markProprietaryProjects() {
+	function markProprietarySolutions() {
 		var needle = 'Treasury Analytics';
 		var badge = '<span class="bfs-proprietary-badge">Solution propri&eacute;taire BFS</span>';
-		document.querySelectorAll('#project-selector option, .projects-selector option').forEach(function (opt) {
+		var selectors = '#project-selector option, .projects-selector option, #category_id option, select[name="category_id"] option';
+
+		document.querySelectorAll(selectors).forEach(function (opt) {
 			if (opt.textContent.indexOf(needle) !== -1 && opt.textContent.indexOf('Solution propri') === -1) {
 				opt.textContent = opt.textContent + ' — Solution propriétaire BFS';
 			}
 		});
+
 		document.querySelectorAll('#sidebar a, .nav-list a').forEach(function (link) {
 			if (link.textContent.indexOf(needle) !== -1 && !link.querySelector('.bfs-proprietary-badge')) {
 				link.insertAdjacentHTML('beforeend', badge);
@@ -54,7 +57,7 @@
 			welcome.className = 'bfs-login-welcome';
 			welcome.innerHTML =
 				'<h1 class="bfs-login-welcome__title">Portail Support BFS</h1>' +
-				'<p class="bfs-login-welcome__lead">D&eacute;clarez et suivez vos demandes d\'assistance pour les solutions BFS.</p>' +
+				'<p class="bfs-login-welcome__lead">Espace s&eacute;curis&eacute; par client : vos tickets ne sont visibles que par votre organisation et l\'&eacute;quipe BFS.</p>' +
 				'<ul class="bfs-login-welcome__solutions">' +
 				'<li>Sage XRT</li>' +
 				'<li>Sage SXA</li>' +
@@ -71,6 +74,6 @@
 			return;
 		}
 
-		markProprietaryProjects();
+		markProprietarySolutions();
 	});
 })();

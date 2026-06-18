@@ -4,12 +4,13 @@
  */
 
 require_once __DIR__ . '/inc/BfsSeed.php';
+require_once __DIR__ . '/inc/BfsArchitecture.php';
 
 class BfsPortalPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'BFS Support Portal';
 		$this->description = 'Personnalisation graphique et fonctionnelle du portail support BFS.';
-		$this->version     = '0.3.6';
+		$this->version     = '0.4.0';
 		$this->author      = 'Business Financial Solutions';
 		$this->url         = 'https://www.bfs.tn';
 	}
@@ -17,6 +18,10 @@ class BfsPortalPlugin extends MantisPlugin {
 	function config() {
 		return array(
 			'portal_seeded' => array(
+				'type'    => PLUGIN_CONFIG_INT,
+				'default' => OFF,
+			),
+			'architecture_v2' => array(
 				'type'    => PLUGIN_CONFIG_INT,
 				'default' => OFF,
 			),
@@ -33,11 +38,11 @@ class BfsPortalPlugin extends MantisPlugin {
 	}
 
 	/**
-	 * Auto-réparation : crée les solutions si le seed a échoué silencieusement.
+	 * Auto-réparation : migration architecture client si nécessaire.
 	 */
 	function core_ready() {
-		if( !BfsSeed::all_projects_exist() ) {
-			BfsSeed::run();
+		if( !BfsArchitecture::is_ready() ) {
+			BfsArchitecture::run();
 		}
 	}
 
@@ -51,6 +56,7 @@ class BfsPortalPlugin extends MantisPlugin {
 	 */
 	function schema() {
 		return array(
+			array( null ),
 			array( null ),
 			array( null ),
 			array( null ),
