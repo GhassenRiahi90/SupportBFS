@@ -1,6 +1,7 @@
 name: Deploy to cPanel (FTP)
 
-# Deploiement FTP vers support.bfs.tn (public_html/support)
+# Deploiement FTP vers support.bfs.tn
+# Compte FTP chrooté : racine = public_html/support/ → server-dir: /
 # Phase 1 : declenchement MANUEL uniquement (workflow_dispatch).
 # Pour activer le deploiement auto sur push main, decommenter le bloc push ci-dessous.
 # Secrets requis : FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
@@ -13,7 +14,7 @@ on:
 
 jobs:
   deploy:
-    name: Sync MantisBT to public_html/support
+    name: Sync MantisBT to support.bfs.tn (FTP chroot)
     runs-on: ubuntu-latest
     concurrency:
       group: ftp-deploy-support-bfs
@@ -33,7 +34,7 @@ jobs:
           security: loose
           timeout: 600000
           local-dir: ./
-          server-dir: public_html/support/
+          server-dir: /
           dangerous-clean-slate: false
           log-level: standard
           exclude: |
