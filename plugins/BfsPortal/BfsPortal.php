@@ -2,27 +2,45 @@
 /**
  * Plugin BfsPortal — Portail Support BFS
  *
- * Phase 1 : squelette installable (charte graphique et fonctionnalités en Phase 2+).
+ * Charte graphique, login, masquage branding MantisBT (sans modification du core).
  */
 
 class BfsPortalPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'BFS Support Portal';
 		$this->description = 'Personnalisation graphique et fonctionnelle du portail support BFS.';
-		$this->version     = '0.1.0';
+		$this->version     = '0.2.0';
 		$this->author      = 'Business Financial Solutions';
 		$this->url         = 'https://www.bfs.tn';
 	}
 
 	function hooks() {
 		return array(
-			'EVENT_LAYOUT_RESOURCES' => 'resources',
+			'EVENT_LAYOUT_RESOURCES'  => 'resources',
+			'EVENT_LAYOUT_PAGE_FOOTER' => 'page_footer',
 		);
 	}
 
 	function resources() {
+		echo '<link rel="preconnect" href="https://fonts.googleapis.com" />' . "\n";
+		echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />' . "\n";
+		echo '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" />' . "\n";
 		echo '<link rel="stylesheet" type="text/css" href="'
 			. plugin_file( 'assets/css/bfs.css' )
 			. '" />' . "\n";
+		echo '<script src="'
+			. plugin_file( 'assets/js/bfs-portal.js' )
+			. '"></script>' . "\n";
+	}
+
+	function page_footer() {
+		$t_year = date( 'Y' );
+		echo '<div class="bfs-portal-footer col-xs-12">' . "\n";
+		echo '<p class="bfs-portal-footer__title">Business Financial Solutions</p>' . "\n";
+		echo '<p class="bfs-portal-footer__meta">Portail support clients &mdash; '
+			. '<a href="mailto:support@bfs.tn">support@bfs.tn</a>'
+			. ' &mdash; <a href="https://www.bfs.tn" target="_blank" rel="noopener">www.bfs.tn</a></p>' . "\n";
+		echo '<p class="bfs-portal-footer__copy">&copy; ' . $t_year . ' BFS. Tous droits r&eacute;serv&eacute;s.</p>' . "\n";
+		echo '</div>' . "\n";
 	}
 }

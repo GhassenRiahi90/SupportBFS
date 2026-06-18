@@ -20,8 +20,9 @@ Toute personnalisation passe par **plugins** et **fichiers config dédiés**, sa
 
 | Fichier | Rôle | Phase |
 |---|---|---|
-| `BfsPortal.php` | Plugin principal (hooks layout, emails, dashboard) | 1 (squelette) |
-| `assets/css/bfs.css` | Charte graphique BFS | 1 (variables CSS) |
+| `BfsPortal.php` | Plugin principal (hooks layout, emails, dashboard) | 2 |
+| `assets/css/bfs.css` | Charte graphique BFS complète | 2 |
+| `assets/js/bfs-portal.js` | Bloc d'accueil login, classe body | 2 |
 | `assets/img/bfs-logo.png` | Logo header / login / emails | 1 |
 | `assets/img/favicon.ico` | Favicon navigateur | 1 |
 
@@ -43,7 +44,7 @@ Toute personnalisation passe par **plugins** et **fichiers config dédiés**, sa
 |---|---|---|
 | `config/config_inc.php.sample` | Modèle config BFS (DB, SMTP, URL) | Oui |
 | `config/config_inc.php` | Config production (secrets) | **Non** |
-| `config/custom_strings_inc.php` | Vocabulaire portail (Ticket, Solution…) | Phase 3 |
+| `config/custom_strings_inc.php` | Vocabulaire / branding portail | Phase 2 |
 | `config/custom_constants_inc.php` | Statuts / criticité custom | Phase 3 |
 
 ---

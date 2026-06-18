@@ -1,15 +1,366 @@
 /**
- * Support BFS — Charte graphique (Phase 2 : styles complets)
- * Palette calibrée depuis le logo BFS officiel.
+ * Support BFS — Charte graphique portail (Phase 2)
+ * Palette : bleu marque, gris institutionnel, couleurs fonctionnelles réservées aux statuts.
  */
+
 :root {
-	--bfs-blue-dark: #0073B1;
-	--bfs-blue-light: #54B9E9;
-	--bfs-grey-body: #5B6770;
-	--bfs-grey-muted: #A6A9AA;
+	--bfs-blue-dark: #0E5A8A;
+	--bfs-blue-light: #4FA8D8;
+	--bfs-grey-body: #5A6670;
+	--bfs-grey-muted: #A8B2BA;
 	--bfs-black: #111111;
 	--bfs-white: #FFFFFF;
 	--bfs-success: #2E7D32;
 	--bfs-warning: #E65100;
 	--bfs-error: #B71C1C;
+	--bfs-radius: 6px;
+	--bfs-shadow: 0 2px 12px rgba(14, 90, 138, 0.08);
+	--bfs-font: "Source Sans 3", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Typographie globale                                                         */
+/* -------------------------------------------------------------------------- */
+
+.bfs-portal,
+.bfs-portal body {
+	font-family: var(--bfs-font) !important;
+	color: var(--bfs-grey-body);
+}
+
+.bfs-portal h1,
+.bfs-portal h2,
+.bfs-portal h3,
+.bfs-portal h4,
+.bfs-portal h5,
+.bfs-portal .widget-title {
+	font-family: var(--bfs-font) !important;
+	color: var(--bfs-black);
+	font-weight: 600;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Header / navbar                                                             */
+/* -------------------------------------------------------------------------- */
+
+.bfs-portal #navbar.navbar {
+	background: linear-gradient(135deg, var(--bfs-blue-dark) 0%, #0a4a72 100%) !important;
+	border-bottom: 3px solid var(--bfs-blue-light) !important;
+	box-shadow: var(--bfs-shadow);
+}
+
+.bfs-portal #navbar .navbar-brand {
+	padding-top: 8px !important;
+	padding-bottom: 8px !important;
+}
+
+.bfs-portal #navbar .navbar-brand .smaller-75 {
+	display: inline-block;
+	width: 220px;
+	height: 44px;
+	background: url("../img/bfs-logo.png") left center / contain no-repeat;
+	text-indent: -9999px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.bfs-portal #navbar .ace-nav > li > a,
+.bfs-portal #navbar .navbar-toggle {
+	color: var(--bfs-white) !important;
+}
+
+.bfs-portal #navbar .ace-nav > li > a:hover,
+.bfs-portal #navbar .ace-nav > li.open > a {
+	background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.bfs-portal #navbar .icon-bar {
+	background-color: var(--bfs-white) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Sidebar                                                                     */
+/* -------------------------------------------------------------------------- */
+
+.bfs-portal #sidebar {
+	background: var(--bfs-white) !important;
+	border-right: 1px solid #e8ecef;
+}
+
+.bfs-portal #sidebar .nav-list > li > a {
+	color: var(--bfs-grey-body) !important;
+	font-weight: 500;
+}
+
+.bfs-portal #sidebar .nav-list > li.active > a,
+.bfs-portal #sidebar .nav-list > li > a:hover {
+	background: rgba(79, 168, 216, 0.12) !important;
+	color: var(--bfs-blue-dark) !important;
+}
+
+.bfs-portal #sidebar .nav-list > li.active > a .menu-icon,
+.bfs-portal #sidebar .nav-list > li > a:hover .menu-icon {
+	color: var(--bfs-blue-dark) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Boutons primaires / liens                                                   */
+/* -------------------------------------------------------------------------- */
+
+.bfs-portal .btn-primary,
+.bfs-portal .btn-primary:focus,
+.bfs-portal .btn-primary:active {
+	background-color: var(--bfs-blue-dark) !important;
+	border-color: var(--bfs-blue-dark) !important;
+	border-radius: var(--bfs-radius) !important;
+}
+
+.bfs-portal .btn-primary:hover {
+	background-color: #0c4d76 !important;
+	border-color: #0c4d76 !important;
+}
+
+.bfs-portal a:not(.btn) {
+	color: var(--bfs-blue-dark);
+}
+
+.bfs-portal a:not(.btn):hover {
+	color: var(--bfs-blue-light);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Widgets / tableaux tickets                                                  */
+/* -------------------------------------------------------------------------- */
+
+.bfs-portal .widget-box.widget-color-blue2 > .widget-header {
+	background: var(--bfs-blue-dark) !important;
+	border-color: var(--bfs-blue-dark) !important;
+}
+
+.bfs-portal .table > thead > tr > th {
+	background: #f4f7f9;
+	color: var(--bfs-black);
+	font-weight: 600;
+	border-bottom: 2px solid var(--bfs-blue-light);
+}
+
+.bfs-portal .table-striped > tbody > tr:nth-child(odd) {
+	background-color: #fafbfc;
+}
+
+/* Badges de statut — couleurs fonctionnelles uniquement */
+.bfs-portal .label[class*="status-"][class*="-bg"],
+.bfs-portal td .label.status-bg,
+.bfs-portal span.label[class*="status-"] {
+	display: inline-block;
+	padding: 0.35em 0.65em;
+	font-size: 11px;
+	font-weight: 600;
+	border-radius: 4px;
+	color: var(--bfs-white) !important;
+	letter-spacing: 0.02em;
+}
+
+/* Nouveau */
+.bfs-portal .status-10-bg,
+.bfs-portal .label.status-10-bg { background-color: var(--bfs-grey-muted) !important; color: var(--bfs-black) !important; }
+.bfs-portal .status-10-fg { color: var(--bfs-grey-body) !important; }
+
+/* Feedback / en attente */
+.bfs-portal .status-20-bg,
+.bfs-portal .label.status-20-bg { background-color: #ffb74d !important; color: var(--bfs-black) !important; }
+
+/* Pris en charge / confirmé */
+.bfs-portal .status-30-bg,
+.bfs-portal .status-40-bg,
+.bfs-portal .label.status-30-bg,
+.bfs-portal .label.status-40-bg { background-color: var(--bfs-blue-light) !important; }
+
+/* En cours / assigné */
+.bfs-portal .status-50-bg,
+.bfs-portal .label.status-50-bg { background-color: var(--bfs-warning) !important; }
+
+/* Résolu */
+.bfs-portal .status-80-bg,
+.bfs-portal .label.status-80-bg { background-color: var(--bfs-success) !important; }
+
+/* Fermé */
+.bfs-portal .status-90-bg,
+.bfs-portal .label.status-90-bg { background-color: #1b5e20 !important; }
+
+/* -------------------------------------------------------------------------- */
+/* Masquage branding MantisBT                                                  */
+/* -------------------------------------------------------------------------- */
+
+.bfs-portal #powered-by-mantisbt-logo,
+.bfs-portal .footer address strong,
+.bfs-portal .footer address small:first-of-type,
+.bfs-portal .footer address a[href*="mantisbt.org"] {
+	display: none !important;
+}
+
+.bfs-portal .footer .bfs-portal-footer {
+	margin-top: 0.5rem;
+	padding-top: 0.75rem;
+	border-top: 1px solid #e0e4e8;
+	text-align: center;
+}
+
+.bfs-portal .bfs-portal-footer__title {
+	margin: 0 0 0.25rem;
+	font-weight: 600;
+	color: var(--bfs-blue-dark);
+	font-size: 14px;
+}
+
+.bfs-portal .bfs-portal-footer__meta,
+.bfs-portal .bfs-portal-footer__copy {
+	margin: 0.15rem 0;
+	font-size: 12px;
+	color: var(--bfs-grey-body);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Page de login                                                               */
+/* -------------------------------------------------------------------------- */
+
+.bfs-portal body.login-layout {
+	background: linear-gradient(160deg, #e8f4fb 0%, #f5f7f9 45%, #ffffff 100%) !important;
+}
+
+.bfs-portal body.login-layout.light-login {
+	background: linear-gradient(160deg, #e8f4fb 0%, #f5f7f9 45%, #ffffff 100%) !important;
+}
+
+.bfs-portal .login-container {
+	max-width: 480px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+.bfs-portal .login-logo {
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+
+.bfs-portal .login-logo img {
+	max-width: 280px;
+	width: 100%;
+	height: auto;
+}
+
+.bfs-portal .bfs-login-welcome {
+	text-align: center;
+	margin: 1rem 0 1.5rem;
+	padding: 1.25rem 1rem;
+	background: var(--bfs-white);
+	border-radius: var(--bfs-radius);
+	border: 1px solid #e2e8ec;
+	box-shadow: var(--bfs-shadow);
+}
+
+.bfs-portal .bfs-login-welcome__title {
+	margin: 0 0 0.5rem;
+	font-size: 1.35rem;
+	color: var(--bfs-blue-dark);
+	font-weight: 700;
+}
+
+.bfs-portal .bfs-login-welcome__lead {
+	margin: 0 0 1rem;
+	font-size: 0.95rem;
+	color: var(--bfs-grey-body);
+	line-height: 1.5;
+}
+
+.bfs-portal .bfs-login-welcome__solutions {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+.bfs-portal .bfs-login-welcome__solutions li {
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: var(--bfs-blue-dark);
+	background: rgba(79, 168, 216, 0.15);
+	border: 1px solid rgba(79, 168, 216, 0.35);
+	border-radius: 999px;
+	padding: 0.35rem 0.75rem;
+}
+
+.bfs-portal .login-container .widget-box {
+	border-radius: var(--bfs-radius);
+	border: 1px solid #e2e8ec;
+	box-shadow: var(--bfs-shadow);
+	overflow: hidden;
+}
+
+.bfs-portal .login-container .widget-header {
+	background: var(--bfs-blue-dark) !important;
+	color: var(--bfs-white) !important;
+	border: none !important;
+}
+
+.bfs-portal .login-container .widget-main {
+	background: var(--bfs-white);
+	padding: 1.5rem 2rem 2rem;
+}
+
+.bfs-portal .login-container .form-control {
+	border-radius: var(--bfs-radius);
+	border-color: var(--bfs-grey-muted);
+}
+
+.bfs-portal .login-container .btn-primary,
+.bfs-portal .login-container input[type="submit"].btn {
+	width: 100%;
+	padding: 0.6rem 1rem;
+	font-weight: 600;
+	font-size: 1rem;
+}
+
+.bfs-portal .login-container .alert-warning {
+	border-radius: var(--bfs-radius);
+	border-color: #ffe082;
+	background: #fff8e1;
+	color: #5d4037;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsive                                                                  */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+	.bfs-portal #navbar .navbar-brand .smaller-75 {
+		width: 160px;
+		height: 36px;
+	}
+
+	.bfs-portal .login-logo img {
+		max-width: 220px;
+	}
+
+	.bfs-portal .bfs-login-welcome__solutions {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.bfs-portal .login-container .widget-main {
+		padding: 1.25rem 1rem 1.5rem;
+	}
+
+	.bfs-portal .table-responsive {
+		border: none;
+	}
+}
+
+@media (max-width: 480px) {
+	.bfs-portal .bfs-login-welcome__title {
+		font-size: 1.15rem;
+	}
 }

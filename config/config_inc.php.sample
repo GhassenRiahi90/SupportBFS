@@ -26,6 +26,10 @@ $g_path           = 'https://support.bfs.tn/';
 $g_window_title   = 'Support BFS';
 $g_logo_image     = 'plugins/BfsPortal/assets/img/bfs-logo.png';
 $g_favicon_image  = 'plugins/BfsPortal/assets/img/favicon.ico';
+$g_logo_url       = 'my_view_page.php';
+$g_show_version   = OFF;
+$g_font_family    = 'Source Sans 3, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif';
+$g_copyright_statement = 'Business Financial Solutions — Portail support clients';
 
 # --- Langue ---
 $g_default_language = 'french';
