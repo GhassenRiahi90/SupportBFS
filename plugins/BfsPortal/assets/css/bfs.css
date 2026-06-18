@@ -220,6 +220,18 @@
 	color: var(--bfs-grey-body);
 }
 
+.bfs-portal .bfs-portal-footer__copy a.bfs-portal-footer__gas {
+	color: var(--bfs-blue-dark);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.bfs-portal .bfs-portal-footer__copy a.bfs-portal-footer__gas:hover,
+.bfs-portal .bfs-portal-footer__copy a.bfs-portal-footer__gas:focus {
+	color: var(--bfs-blue-light);
+	text-decoration: underline;
+}
+
 /* -------------------------------------------------------------------------- */
 /* Page de login                                                               */
 /* -------------------------------------------------------------------------- */
