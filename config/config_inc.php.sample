@@ -39,6 +39,9 @@ $g_default_language = 'french';
 $g_default_project_view_status = VS_PRIVATE;
 $g_default_bug_view_status     = VS_PRIVATE;
 $g_private_project_threshold   = DEVELOPER;   # équipe BFS (≥ Developer) voit tous les projets privés
+$g_limit_reporters             = ON;          # rapporteurs : vue limitée à leurs demandes (Phase 6)
+$g_allow_reporter_close        = OFF;
+$g_show_user_email_threshold   = NOBODY;
 
 # --- Workflow BFS (statuts / criticité) ---
 $g_status_enum_string   = '10:nouveau,20:en_attente_client,30:pris_en_charge,40:confirme,50:en_cours,80:resolu,90:ferme';

@@ -3,8 +3,9 @@
  * Tableau de bord BFS (Mon affichage).
  */
 
-class BfsDashboard {
-	public static function render() {
+require_once __DIR__ . '/BfsClientAccess.php';
+
+class BfsDashboard {	public static function render() {
 		if( !auth_is_user_authenticated() || !is_page_name( 'my_view_page.php' ) ) {
 			return;
 		}
@@ -91,6 +92,12 @@ class BfsDashboard {
 	public static function filter_sidebar( array $p_items ) {
 		if( !auth_is_user_authenticated() ) {
 			return $p_items;
+		}
+
+		if( BfsClientAccess::is_client_user() ) {
+			$t_filtered = BfsClientAccess::filter_sidebar_items( $p_items );
+			self::append_sidebar_links( $t_filtered );
+			return $t_filtered;
 		}
 
 		if( access_get_global_level( auth_get_current_user_id() ) >= DEVELOPER ) {

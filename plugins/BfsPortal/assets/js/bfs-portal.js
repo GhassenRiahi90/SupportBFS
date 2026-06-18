@@ -42,10 +42,29 @@
 		}
 	}
 
+	function hideClientAdminControls() {
+		if (!document.body.classList.contains('bfs-client-user')) {
+			return;
+		}
+
+		document.querySelectorAll('a[href*="manage_user_create_page"]').forEach(function (el) {
+			el.style.display = 'none';
+		});
+
+		document.querySelectorAll('#projects-list a').forEach(function (link) {
+			var href = link.getAttribute('href') || '';
+			var text = (link.textContent || '').toLowerCase();
+			if (href.indexOf('project_id=0') !== -1 || text.indexOf('tous les') !== -1 || text.indexOf('all projects') !== -1) {
+				link.closest('li') && (link.closest('li').style.display = 'none');
+			}
+		});
+	}
+
 	onReady(function () {
 		document.documentElement.classList.add('bfs-portal');
 		document.body.classList.add('bfs-portal');
 		hideMantisFooter();
+		hideClientAdminControls();
 
 		if (document.body.classList.contains('login-layout')) {
 			var container = document.querySelector('.login-container');

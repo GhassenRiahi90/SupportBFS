@@ -350,3 +350,20 @@
 		font-size: 1.15rem;
 	}
 }
+
+/* -------------------------------------------------------------------------- */
+/* Phase 6 — utilisateurs client (rapporteurs)                                 */
+/* -------------------------------------------------------------------------- */
+
+.bfs-portal.bfs-client-user .navbar-buttons a[href*="manage_user_create_page"] {
+	display: none !important;
+}
+
+.bfs-portal.bfs-client-user #projects-list .all-projects-item,
+.bfs-portal.bfs-client-user #projects-list a[data-project-id="0"] {
+	display: none !important;
+}
+
+.bfs-portal .bfs-audit-summary .label {
+	margin-right: 0.35rem;
+}
