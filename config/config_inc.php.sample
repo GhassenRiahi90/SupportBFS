@@ -29,7 +29,7 @@ $g_favicon_image  = 'plugins/BfsPortal/assets/img/favicon.ico';
 $g_logo_url       = 'my_view_page.php';
 $g_show_version   = OFF;
 $g_font_family    = 'Source Sans 3, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif';
-$g_copyright_statement = 'Business Financial Solutions — Portail support clients';
+$g_copyright_statement = '';
 
 # --- Langue ---
 $g_default_language = 'french';

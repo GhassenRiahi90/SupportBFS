@@ -2,7 +2,8 @@
  * Support BFS — masquage footer MantisBT
  * Ne dépend pas de la classe .bfs-portal (fichier chargé uniquement par le plugin).
  */
-.footer .footer-content > .col-md-6 {
+.footer .footer-content > .col-md-6,
+.footer .footer-content > .col-xs-12:not(.bfs-portal-footer) {
 	display: none !important;
 	visibility: hidden !important;
 	height: 0 !important;

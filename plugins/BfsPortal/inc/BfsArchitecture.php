@@ -97,6 +97,7 @@ class BfsArchitecture {
 		config_set_global( 'default_project_view_status', VS_PRIVATE );
 		config_set_global( 'default_bug_view_status', VS_PRIVATE );
 		config_set_global( 'private_project_threshold', DEVELOPER );
+		config_set_global( 'copyright_statement', '' );
 	}
 
 	private static function apply_workflow_config() {

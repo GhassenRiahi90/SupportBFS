@@ -11,7 +11,7 @@ class BfsPortalPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'BFS Support Portal';
 		$this->description = 'Personnalisation graphique et fonctionnelle du portail support BFS.';
-		$this->version     = '0.5.0';
+		$this->version     = '0.5.1';
 		$this->author      = 'Business Financial Solutions';
 		$this->url         = 'https://www.bfs.tn';
 	}
@@ -47,6 +47,7 @@ class BfsPortalPlugin extends MantisPlugin {
 		if( !BfsArchitecture::is_ready() ) {
 			BfsArchitecture::run();
 		}
+		config_set_global( 'copyright_statement', '' );
 	}
 
 	function install() {
@@ -59,6 +60,7 @@ class BfsPortalPlugin extends MantisPlugin {
 	 */
 	function schema() {
 		return array(
+			array( null ),
 			array( null ),
 			array( null ),
 			array( null ),
@@ -108,7 +110,7 @@ class BfsPortalPlugin extends MantisPlugin {
 
 	function page_footer() {
 		echo '<style id="bfs-hide-mantis-footer">'
-			. '.footer .footer-content > .col-md-6{display:none!important}'
+			. '.footer .footer-content > .col-md-6,.footer .footer-content > .col-xs-12:not(.bfs-portal-footer){display:none!important}'
 			. '.footer .footer-content > .bfs-portal-footer{display:block!important;width:100%}'
 			. '.footer .bfs-portal-footer__row{display:flex!important;flex-wrap:wrap;align-items:center;justify-content:space-between;width:100%;gap:.5rem 1rem}'
 			. '.footer .bfs-portal-footer__meta{margin-left:auto!important;text-align:right!important}'
