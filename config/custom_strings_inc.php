@@ -17,7 +17,8 @@ $s_custom_messages = array(
 		'bug_monitor'            => 'Ticket surveillé',
 		'bug_end_monitor'        => 'Fin de surveillance du ticket',
 		'bug_relationships'      => 'Relations',
-		'view_bugs_link'         => 'Afficher les demandes',
+		'view_bugs_link'         => 'Mes demandes',
+		'report_bug_link'        => 'Nouvelle demande',
 		'view_submitted_bug_link'=> 'Voir la demande soumise %1$s',
 		'select_project_button'  => 'Choisir un client',
 		'projects_link'          => 'Clients',
@@ -37,8 +38,11 @@ $s_custom_messages = array(
 		'issue_status_percentage'=> 'Pourcentage des statuts de demande',
 		'summary_link'           => 'Tableau de bord',
 		'summary_title'          => 'Tableau de bord',
+		'my_view_link'           => 'Mon tableau de bord',
 		'mantis_link'            => 'Portail Support BFS',
 		'login_title'            => 'Connexion au portail support BFS',
+		'bfs_contact_support_link' => 'Contact support BFS',
+		'bfs_website_link'       => 'Site www.bfs.tn',
 
 		# Énumérations métier (libellés affichés — clés config dans BfsSeed)
 		'status_enum_string' => '10:Nouveau,20:En attente client,30:Pris en charge,40:Confirmé,50:En cours,80:Résolu,90:Fermé',

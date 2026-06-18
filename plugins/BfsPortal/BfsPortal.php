@@ -5,12 +5,13 @@
 
 require_once __DIR__ . '/inc/BfsSeed.php';
 require_once __DIR__ . '/inc/BfsArchitecture.php';
+require_once __DIR__ . '/inc/BfsDashboard.php';
 
 class BfsPortalPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'BFS Support Portal';
 		$this->description = 'Personnalisation graphique et fonctionnelle du portail support BFS.';
-		$this->version     = '0.4.0';
+		$this->version     = '0.5.0';
 		$this->author      = 'Business Financial Solutions';
 		$this->url         = 'https://www.bfs.tn';
 	}
@@ -30,10 +31,12 @@ class BfsPortalPlugin extends MantisPlugin {
 
 	function hooks() {
 		return array(
-			'EVENT_CORE_READY'         => 'core_ready',
-			'EVENT_LAYOUT_RESOURCES'   => 'resources',
-			'EVENT_LAYOUT_BODY_BEGIN'  => 'body_begin',
-			'EVENT_LAYOUT_PAGE_FOOTER' => 'page_footer',
+			'EVENT_CORE_READY'           => 'core_ready',
+			'EVENT_LAYOUT_RESOURCES'     => 'resources',
+			'EVENT_LAYOUT_BODY_BEGIN'    => 'body_begin',
+			'EVENT_LAYOUT_CONTENT_BEGIN' => 'content_begin',
+			'EVENT_LAYOUT_PAGE_FOOTER'   => 'page_footer',
+			'EVENT_MENU_MAIN_FILTER'     => 'menu_main_filter',
 		);
 	}
 
@@ -60,6 +63,7 @@ class BfsPortalPlugin extends MantisPlugin {
 			array( null ),
 			array( null ),
 			array( null ),
+			array( null ),
 		);
 	}
 
@@ -81,6 +85,9 @@ class BfsPortalPlugin extends MantisPlugin {
 		echo '<link rel="stylesheet" type="text/css" href="'
 			. plugin_file( 'assets/css/bfs-footer.css' )
 			. '" />' . "\n";
+		echo '<link rel="stylesheet" type="text/css" href="'
+			. plugin_file( 'assets/css/bfs-dashboard.css' )
+			. '" />' . "\n";
 		echo '<script src="'
 			. plugin_file( 'assets/js/bfs-portal.js' )
 			. '"></script>' . "\n";
@@ -88,6 +95,15 @@ class BfsPortalPlugin extends MantisPlugin {
 
 	function body_begin() {
 		echo '<script>document.documentElement.classList.add("bfs-portal");document.body.classList.add("bfs-portal");</script>' . "\n";
+	}
+
+	function content_begin() {
+		BfsDashboard::render();
+	}
+
+	function menu_main_filter( $p_event, array $p_sidebar_items ) {
+		$t_items = BfsDashboard::filter_sidebar( $p_sidebar_items );
+		return array( $t_items );
 	}
 
 	function page_footer() {
