@@ -8,7 +8,7 @@ class BfsSeed {
 	 * Exécute le seed une seule fois (idempotent).
 	 */
 	public static function run() {
-		if( ON == config_get( 'bfs_portal_seeded', OFF ) ) {
+		if( ON == plugin_config_get( 'portal_seeded', OFF ) ) {
 			return;
 		}
 
@@ -79,7 +79,7 @@ class BfsSeed {
 
 		self::ensure_custom_fields( $t_project_ids );
 
-		config_set_global( 'bfs_portal_seeded', ON );
+		plugin_config_set( 'portal_seeded', ON );
 	}
 
 	private static function apply_global_config() {

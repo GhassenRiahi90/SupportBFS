@@ -1,31 +1,34 @@
 /**
- * Support BFS — masquage footer MantisBT (complément)
+ * Support BFS — masquage footer MantisBT
+ * Ne dépend pas de la classe .bfs-portal (fichier chargé uniquement par le plugin).
  */
-.bfs-portal .footer-inner .footer-content > .col-md-6.no-padding,
-.bfs-portal .footer-inner .footer-content > .col-md-6:has(#powered-by-mantisbt-logo) {
+.footer .footer-content > .col-md-6 {
+	display: none !important;
+	visibility: hidden !important;
+	height: 0 !important;
+	max-height: 0 !important;
+	overflow: hidden !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+}
+
+.footer #powered-by-mantisbt-logo,
+.footer .footer-content address {
 	display: none !important;
 }
 
-/* Fallback navigateurs sans :has() */
-.bfs-portal #powered-by-mantisbt-logo {
-	display: none !important;
-}
-
-.bfs-portal .footer-inner .footer-content > .col-md-6.no-padding {
-	display: none !important;
-}
-
-.bfs-portal .footer address {
-	display: none !important;
-}
-
-.bfs-portal .footer .bfs-portal-footer {
+.footer .footer-content > .bfs-portal-footer {
 	display: block !important;
+	visibility: visible !important;
+	height: auto !important;
+	max-height: none !important;
 	width: 100%;
 }
 
 /* Badge solution propriétaire (Treasury Analytics) */
-.bfs-portal .bfs-proprietary-badge {
+.bfs-portal .bfs-proprietary-badge,
+.bfs-proprietary-badge {
 	display: inline-block;
 	margin-left: 0.5rem;
 	padding: 0.15rem 0.5rem;
@@ -33,9 +36,9 @@
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.04em;
-	color: var(--bfs-blue-dark);
+	color: var(--bfs-blue-dark, #0e5a8a);
 	background: rgba(79, 168, 216, 0.2);
-	border: 1px solid var(--bfs-blue-light);
+	border: 1px solid var(--bfs-blue-light, #4fa8d8);
 	border-radius: 4px;
 	vertical-align: middle;
 }

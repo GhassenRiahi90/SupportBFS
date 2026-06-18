@@ -27,8 +27,22 @@
 		});
 	}
 
+	function hideMantisFooter() {
+		document.querySelectorAll('.footer .footer-content > .col-md-6').forEach(function (col) {
+			if (!col.classList.contains('bfs-portal-footer')) {
+				col.style.display = 'none';
+			}
+		});
+		var logo = document.getElementById('powered-by-mantisbt-logo');
+		if (logo && logo.parentElement) {
+			logo.parentElement.style.display = 'none';
+		}
+	}
+
 	onReady(function () {
 		document.documentElement.classList.add('bfs-portal');
+		document.body.classList.add('bfs-portal');
+		hideMantisFooter();
 
 		if (document.body.classList.contains('login-layout')) {
 			var container = document.querySelector('.login-container');

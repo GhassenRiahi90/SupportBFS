@@ -34,6 +34,19 @@ $g_copyright_statement = 'Business Financial Solutions — Portail support clien
 # --- Langue ---
 $g_default_language = 'french';
 
+# --- Workflow BFS (statuts / criticité) ---
+$g_status_enum_string   = '10:nouveau,20:en_attente_client,30:pris_en_charge,40:confirme,50:en_cours,80:resolu,90:ferme';
+$g_severity_enum_string = '10:information,50:mineur,60:majeur,80:bloquant';
+$g_status_colors = array(
+	'nouveau'           => '#A8B2BA',
+	'en_attente_client' => '#FFB74D',
+	'pris_en_charge'    => '#4FA8D8',
+	'confirme'          => '#4FA8D8',
+	'en_cours'          => '#E65100',
+	'resolu'            => '#2E7D32',
+	'ferme'             => '#1B5E20',
+);
+
 # --- Accès anonyme / inscription ---
 $g_allow_signup             = OFF;
 $g_allow_anonymous_login    = OFF;
