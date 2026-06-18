@@ -9,7 +9,7 @@ class BfsPortalPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'BFS Support Portal';
 		$this->description = 'Personnalisation graphique et fonctionnelle du portail support BFS.';
-		$this->version     = '0.3.3';
+		$this->version     = '0.3.4';
 		$this->author      = 'Business Financial Solutions';
 		$this->url         = 'https://www.bfs.tn';
 	}
@@ -80,14 +80,15 @@ class BfsPortalPlugin extends MantisPlugin {
 
 		$t_year = date( 'Y' );
 		echo '<div class="bfs-portal-footer col-xs-12">' . "\n";
-		echo '<p class="bfs-portal-footer__title">Business Financial Solutions</p>' . "\n";
-		echo '<p class="bfs-portal-footer__meta">Portail support clients &mdash; '
-			. '<a href="mailto:support@bfs.tn">support@bfs.tn</a>'
-			. ' &mdash; <a href="https://www.bfs.tn" target="_blank" rel="noopener">www.bfs.tn</a></p>' . "\n";
+		echo '<div class="bfs-portal-footer__row">' . "\n";
 		echo '<p class="bfs-portal-footer__copy">&copy; Copyright BFS ' . $t_year
 			. ' | D&eacute;velopp&eacute; par '
 			. '<a class="bfs-portal-footer__gas" href="https://growthacceleratorservices.tn/" '
 			. 'target="_blank" rel="noopener noreferrer">Growth Accelerator Services (GAS)</a></p>' . "\n";
+		echo '<p class="bfs-portal-footer__meta">Portail support clients &mdash; '
+			. '<a href="mailto:support@bfs.tn">support@bfs.tn</a>'
+			. ' &mdash; <a href="https://www.bfs.tn" target="_blank" rel="noopener">www.bfs.tn</a></p>' . "\n";
+		echo '</div>' . "\n";
 		echo '</div>' . "\n";
 	}
 }
