@@ -5,7 +5,8 @@
 
 require_once __DIR__ . '/BfsClientAccess.php';
 
-class BfsDashboard {	public static function render() {
+class BfsDashboard {
+	public static function render() {
 		if( !auth_is_user_authenticated() || !is_page_name( 'my_view_page.php' ) ) {
 			return;
 		}
@@ -19,13 +20,21 @@ class BfsDashboard {	public static function render() {
 		$t_realname = user_get_name( $t_user_id );
 		$t_project_id = helper_get_current_project();
 		$t_can_report = access_has_any_project_level( 'report_bug_threshold' );
+		$t_is_client = BfsClientAccess::is_client_user( $t_user_id );
+		$t_client_projects = $t_is_client ? BfsClientAccess::get_assigned_project_ids( $t_user_id ) : array();
 
 		$t_reported_open = user_get_reported_open_bug_count( $t_user_id, $t_project_id );
 		$t_assigned_open = user_get_assigned_open_bug_count( $t_user_id, $t_project_id );
 
-		$t_report_url = $t_can_report ? string_get_bug_report_url() : '';
+		$t_report_url = '';
+		if( $t_can_report ) {
+			if( ALL_PROJECTS != $t_project_id && project_exists( $t_project_id ) ) {
+				$t_report_url = BfsClientAccess::get_bug_report_url( $t_project_id );
+			} elseif( $t_is_client && 1 === count( $t_client_projects ) ) {
+				$t_report_url = BfsClientAccess::get_bug_report_url( $t_client_projects[0] );
+			}
+		}
 		$t_view_url = 'view_all_bug_page.php';
-
 		echo '<div class="col-xs-12 bfs-dashboard">' . "\n";
 		echo '<div class="bfs-dashboard__hero widget-box widget-color-blue2">' . "\n";
 		echo '<div class="widget-header widget-header-flat">' . "\n";
@@ -43,12 +52,19 @@ class BfsDashboard {	public static function render() {
 			echo '<strong>Client actif :</strong> ';
 			echo string_display_line( project_get_field( $t_project_id, 'name' ) );
 			echo '</p>' . "\n";
+		} elseif( $t_is_client && 0 === count( $t_client_projects ) ) {
+			echo '<p class="bfs-dashboard__context bfs-dashboard__context--hint">';
+			echo 'Aucun espace client ne vous est assign&eacute;. Contactez <a href="mailto:support@bfs.tn">support@bfs.tn</a>.';
+			echo '</p>' . "\n";
+		} elseif( $t_is_client && count( $t_client_projects ) > 1 ) {
+			echo '<p class="bfs-dashboard__context bfs-dashboard__context--hint">';
+			echo 'S&eacute;lectionnez votre espace client dans le menu <strong>Tous les clients</strong> en haut &agrave; droite.';
+			echo '</p>' . "\n";
 		} else {
 			echo '<p class="bfs-dashboard__context bfs-dashboard__context--hint">';
 			echo 'S&eacute;lectionnez votre espace client dans le menu <strong>Tous les clients</strong> en haut &agrave; droite.';
 			echo '</p>' . "\n";
 		}
-
 		echo '<div class="bfs-dashboard__actions">' . "\n";
 		if( $t_can_report && !is_blank( $t_report_url ) ) {
 			echo '<a class="btn btn-primary btn-white btn-round" href="' . string_sanitize_url( $t_report_url ) . '">';

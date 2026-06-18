@@ -17,7 +17,7 @@ class BfsPortalPlugin extends MantisPlugin {
 	function register() {
 		$this->name        = 'BFS Support Portal';
 		$this->description = 'Personnalisation graphique et fonctionnelle du portail support BFS.';
-		$this->version     = '0.7.1';
+		$this->version     = '0.8.0';
 		$this->author      = 'Business Financial Solutions';
 		$this->url         = 'https://www.bfs.tn';
 		$this->page        = 'isolation_audit';
@@ -69,6 +69,10 @@ class BfsPortalPlugin extends MantisPlugin {
 				'type'    => PLUGIN_CONFIG_INT,
 				'default' => OFF,
 			),
+			'demo_client_password' => array(
+				'type'    => PLUGIN_CONFIG_STRING,
+				'default' => '',
+			),
 		);
 	}
 
@@ -85,6 +89,7 @@ class BfsPortalPlugin extends MantisPlugin {
 			'EVENT_NOTIFY_USER_INCLUDE'             => 'notify_user_include',
 			'EVENT_CRONJOB'                         => 'cronjob',
 			'EVENT_MANAGE_PROJECT_USER_CREATE'      => 'manage_project_user_create',
+			'EVENT_MANAGE_PROJECT_USER_UPDATE'      => 'manage_project_user_update',
 			'EVENT_MENU_MANAGE'                     => 'menu_manage',
 		);
 	}
@@ -97,8 +102,7 @@ class BfsPortalPlugin extends MantisPlugin {
 			BfsArchitecture::run();
 		}
 		BfsClientAccess::apply_global_config();
-		BfsClientAccess::enforce_single_project_context();
-		config_set_global( 'copyright_statement', '' );
+		BfsClientAccess::bootstrap_request_context();
 	}
 
 	function install() {
@@ -120,6 +124,7 @@ class BfsPortalPlugin extends MantisPlugin {
 			array( null ),
 			array( null ),
 			array( null ),
+			array( null ),
 		);
 	}
 
@@ -128,7 +133,8 @@ class BfsPortalPlugin extends MantisPlugin {
 	 */
 	function upgrade( $p_schema ) {
 		BfsSeed::run();
-		BfsClientAccess::apply_global_config();
+		BfsClientAccess::apply_global_config( true );
+		BfsClientAccess::repair_invalid_default_projects();
 		return true;
 	}
 
@@ -148,8 +154,12 @@ class BfsPortalPlugin extends MantisPlugin {
 		BfsEmailReminder::cron();
 	}
 
-	function manage_project_user_create( $p_event, array $p_payload ) {
-		BfsClientAccess::on_project_user_create( $p_event, $p_payload );
+	function manage_project_user_create( $p_event, $user_id, $project_id ) {
+		BfsClientAccess::on_project_user_create( $user_id, $project_id );
+	}
+
+	function manage_project_user_update( $p_event, $user_id, $project_id ) {
+		BfsClientAccess::on_project_user_update( $user_id, $project_id );
 	}
 
 	function menu_manage() {

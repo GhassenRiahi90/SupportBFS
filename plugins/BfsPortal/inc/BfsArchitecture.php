@@ -94,16 +94,26 @@ class BfsArchitecture {
 	}
 
 	private static function apply_privacy_config() {
-		config_set_global( 'default_project_view_status', VS_PRIVATE );
-		config_set_global( 'default_bug_view_status', VS_PRIVATE );
-		config_set_global( 'private_project_threshold', DEVELOPER );
-		config_set_global( 'copyright_statement', '' );
+		require_once __DIR__ . '/BfsClientAccess.php';
+
+		BfsClientAccess::persist_global_option( 'default_project_view_status', VS_PRIVATE );
+		BfsClientAccess::persist_global_option( 'default_bug_view_status', VS_PRIVATE );
+		BfsClientAccess::persist_global_option( 'private_project_threshold', DEVELOPER );
+		BfsClientAccess::persist_global_option( 'copyright_statement', '' );
 	}
 
 	private static function apply_workflow_config() {
-		config_set_global( 'status_enum_string', '10:nouveau,20:en_attente_client,30:pris_en_charge,40:confirme,50:en_cours,80:resolu,90:ferme' );
-		config_set_global( 'severity_enum_string', '10:information,50:mineur,60:majeur,80:bloquant' );
-		config_set_global( 'status_colors', array(
+		require_once __DIR__ . '/BfsClientAccess.php';
+
+		BfsClientAccess::persist_global_option(
+			'status_enum_string',
+			'10:nouveau,20:en_attente_client,30:pris_en_charge,40:confirme,50:en_cours,80:resolu,90:ferme'
+		);
+		BfsClientAccess::persist_global_option(
+			'severity_enum_string',
+			'10:information,50:mineur,60:majeur,80:bloquant'
+		);
+		BfsClientAccess::persist_global_option( 'status_colors', array(
 			'nouveau'            => '#A8B2BA',
 			'en_attente_client'  => '#FFB74D',
 			'pris_en_charge'     => '#4FA8D8',
@@ -171,17 +181,21 @@ class BfsArchitecture {
 	}
 
 	private static function ensure_demo_client_user( $p_project_id ) {
+		require_api( 'authentication_api.php' );
+
 		$t_user_id = user_get_id_by_name( self::DEMO_USER_NAME, false );
 		if( false === $t_user_id ) {
+			$t_password = auth_generate_random_password();
 			user_create(
 				self::DEMO_USER_NAME,
-				'Bfs-Demo-Client-2026!',
+				$t_password,
 				self::DEMO_USER_EMAIL,
 				REPORTER,
 				false,
 				true,
 				self::DEMO_USER_REAL
 			);
+			plugin_config_set( 'demo_client_password', $t_password );
 			$t_user_id = user_get_id_by_name( self::DEMO_USER_NAME, false );
 		}
 
@@ -194,7 +208,7 @@ class BfsArchitecture {
 			project_add_user( $p_project_id, $t_user_id, REPORTER );
 		}
 
-		user_pref_set_pref( $t_user_id, 'default_project', $p_project_id );
+		BfsClientAccess::enforce_single_client_project( $t_user_id, $p_project_id );
 	}
 
 	private static function ensure_custom_fields() {
@@ -259,15 +273,6 @@ class BfsArchitecture {
 	}
 
 	private static function fix_invalid_user_default_projects() {
-		db_param_push();
-		$t_query = 'SELECT user_id, default_project FROM {user_pref} WHERE default_project > 0';
-		$t_result = db_query( $t_query );
-
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_default = (int)$t_row['default_project'];
-			if( !project_exists( $t_default ) || !project_enabled( $t_default ) ) {
-				user_pref_set_pref( (int)$t_row['user_id'], 'default_project', ALL_PROJECTS );
-			}
-		}
+		BfsClientAccess::repair_invalid_default_projects();
 	}
 }

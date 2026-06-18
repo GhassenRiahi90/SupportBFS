@@ -24,6 +24,7 @@ $s_bug_relationships      = 'Relations';
 $s_view_bugs_link         = 'Mes demandes';
 $s_report_bug_link        = 'Nouvelle demande';
 $s_view_submitted_bug_link = 'Voir la demande soumise %1$s';
+$s_issue_id               = 'Demande n°';
 $s_select_project_button  = 'Choisir un client';
 $s_projects_link          = 'Clients';
 $s_projects_title         = 'Clients';

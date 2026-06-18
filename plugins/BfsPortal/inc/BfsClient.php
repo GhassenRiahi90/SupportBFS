@@ -3,8 +3,9 @@
  * Création de projets clients BFS (privés, catégories globales héritées).
  */
 
-class BfsClient {
-	/**
+require_once __DIR__ . '/BfsClientAccess.php';
+
+class BfsClient {	/**
 	 * Crée un projet client privé avec héritage des catégories globales de solutions.
 	 *
 	 * @param string $p_name        Nom du client (ex. "Carrefour Tunisie").
@@ -48,6 +49,13 @@ class BfsClient {
 
 		if( null === $p_access_level ) {
 			$p_access_level = REPORTER;
+		}
+
+		$p_project_id = (int)$p_project_id;
+		$p_user_id = (int)$p_user_id;
+
+		if( BfsClientAccess::is_client_user( $p_user_id ) ) {
+			BfsClientAccess::enforce_single_client_project( $p_user_id, $p_project_id );
 		}
 
 		if( !access_has_project_level( VIEWER, $p_project_id, $p_user_id ) ) {
