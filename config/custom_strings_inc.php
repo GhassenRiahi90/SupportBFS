@@ -57,3 +57,15 @@ $s_client_company     = 'Nom du client / société';
 $s_contract_reference = 'Référence contrat client';
 $s_environment        = 'Environnement';
 $s_business_urgency   = 'Urgence métier déclarée';
+
+# Notifications email (terminologie demande)
+$s_email_notification_title_for_action_bug_submitted = 'La demande de support suivante a été SOUMISE.';
+$s_email_notification_title_for_action_bug_assigned = 'La demande de support suivante a été AFFECTÉE.';
+$s_email_notification_title_for_action_bug_unassigned = 'La demande de support suivante a été DÉSASSIGNÉE.';
+$s_email_notification_title_for_action_bug_reopened = 'La demande de support suivante a été ROUVERTE.';
+$s_email_notification_title_for_action_bug_deleted = 'La demande de support suivante a été SUPPRIMÉE.';
+$s_email_notification_title_for_action_bug_updated = 'La demande de support suivante a été MISE À JOUR.';
+$s_email_notification_title_for_action_bugnote_submitted = 'Un COMMENTAIRE a été ajouté à cette demande.';
+$s_email_notification_title_for_status_bug_new = 'La demande suivante est au statut NOUVEAU.';
+$s_email_notification_title_for_status_bug_resolved = 'La demande de support suivante a été RÉSOLUE.';
+$s_email_notification_title_for_status_bug_closed = 'La demande de support suivante a été FERMÉE.';
