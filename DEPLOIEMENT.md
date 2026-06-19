@@ -8,6 +8,8 @@ Développement (Git)  →  GitHub SupportBFS  →  GitHub Actions (FTP)  →  pu
 
 Pas de Git natif côté serveur mutualisé : le déploiement se fait par **synchronisation FTP**.
 
+> **Réinstallation complète** (PHP, base, config) : voir [REINSTALLATION.md](REINSTALLATION.md).
+
 > **Architecture client (v0.4.0+)** : un projet MantisBT = un **client** (privé). Les solutions BFS sont des **catégories globales**. Voir [ONBOARDING_CLIENT.md](ONBOARDING_CLIENT.md) avant tout déploiement réel avec des clients.
 
 ---
@@ -76,6 +78,8 @@ Si la racine FTP de votre compte cPanel n'est pas le home directory, ajuster ce 
 ## 3. Premier déploiement manuel (FTP / cPanel File Manager)
 
 ### Ordre recommandé
+
+0. **PHP** — MultiPHP Manager + MultiPHP INI Editor (`mbstring` obligatoire). Vérifier via `bfs-preflight.php`. Voir [REINSTALLATION.md](REINSTALLATION.md).
 
 1. **Créer la base MySQL** (cPanel → MySQL Databases)
    - Base + utilisateur avec tous les privilèges
