@@ -1,7 +1,6 @@
-# BFS Support — handler PHP EasyApache (mbstring inclus par défaut).
-# Remplace alt-php82 si les extensions CloudLinux ne se chargent pas en web.
+# BFS Support — PHP 8.2 EasyApache FPM (ea-php82 inclut mbstring si package installe).
 # php -- BEGIN BFS handler, do not edit
 <IfModule mime_module>
-  AddHandler application/x-httpd-ea-php83___lsphp .php
+  AddHandler application/x-httpd-ea-php82___lsphp .php
 </IfModule>
 # php -- END BFS handler, do not edit
