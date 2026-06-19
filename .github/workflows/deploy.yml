@@ -8,9 +8,9 @@ name: Deploy to cPanel (FTP)
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - phase-1
 
 jobs:
   deploy:
