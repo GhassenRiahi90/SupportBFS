@@ -168,3 +168,20 @@ Supprimer du serveur :
 Ticket hébergeur :
 
 > Bonjour, le sous-domaine support.bfs.tn (PHP 8.2/8.3 FPM, ea-php) affiche « mbstring extension is not enabled » alors que le fichier `/opt/cpanel/ea-php82/root/usr/lib64/php/modules/mbstring.so` existe. Merci d’activer mbstring pour ce vhost PHP-FPM.
+
+---
+
+## Problème : page BFS WordPress sans CSS (au lieu de Mantis)
+
+**Symptôme :** « Portail support TMA/AMS », menus Accueil / Nos Solutions, page blanche sans style.
+
+**Cause :** WordPress (staging) a été copié dans `public_html/support/`. L’`index.php` WordPress remplace Mantis ; les CSS chargent depuis `staging.bfs.tn`.
+
+**Correction — File Manager** → `public_html/support/` :
+
+Supprimer : `wp-admin/`, `wp-content/`, `wp-includes/`, `wp-config.php`, `wp-load.php`, et l’`index.php` WordPress.
+
+Puis **GitHub Actions → Deploy** (branche `phase-1`) pour restaurer l’`index.php` MantisBT.
+
+Vérifier : https://support.bfs.tn/bfs-ext.php puis https://support.bfs.tn/login_page.php
+
